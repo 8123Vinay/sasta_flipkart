@@ -1,0 +1,7 @@
+.Cart{
+  width:200px;
+  background: lightslategray;
+  height:100vh;
+  position: absolute;
+  left:80vw;   
+}

@@ -1,0 +1,34 @@
+.image{
+    width:250px;
+    height:250px;
+    border-radius:30px;
+}
+
+.Card{
+  width:300px;
+  height:auto; 
+  margin:20px;
+  display:flex;
+  flex-flow:column;
+  border-radius:40px;
+  transition: 0.3s ease-in-out;
+  justify-content: flex-start;
+  
+
+}
+/* .text{
+    text-align: center;
+    position:relative;
+    top:40px;
+    color:gold
+} */
+
+.Card:hover{
+    cursor: pointer;
+    
+
+}
+
+.Card:hover{
+    transform: scale(1.02)
+}
