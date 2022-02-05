@@ -4,12 +4,14 @@ import cartReducer from './cart'
 import userReducer from './user'
 import quotesReducer from './quotes'
 import itemsReducer from './items'
+import newsReducer from './news'
 
-export const reducer=combineReducers({
+const reducer=combineReducers({
     cartState:cartReducer,
     userState:userReducer,
     quoteState:quotesReducer,
     itemsState:itemsReducer,
+    newsState:newsReducer,
     
 })
 

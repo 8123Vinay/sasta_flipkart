@@ -1,6 +1,6 @@
 import React, { createContext ,useState} from 'react'
 import {BrowserRouter, Route,Routes } from 'react-router-dom'
-import {Home,About,Items,Payment,Quotes} from './pages'
+import {Home,About,Items,Payment,Quotes,News} from './pages'
 import  Navbar  from './components/Navbar'
 import './App.css';
 import Cart from './components/Cart'
@@ -26,9 +26,9 @@ function App() {
             <Route path ="/items" element={<Items />} />
             <Route path ="/items/:categoryName" element={<Items inputValue={inputValue} />} />
             <Route path ="/payment" element={<Payment />}/>
-            {/* <Route path ="/quotes" element={<Quotes />}/> */}
+            <Route path="/news" element={<News />} />
+            <Route path ="/cart" element={<Cart />}/>
           </Routes>
-           <Cart />
           <Filter filter={filter} />
         </BrowserRouter>
        

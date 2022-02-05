@@ -4,7 +4,7 @@ const allItems=data.items;
 
 const ACTIONS={
     SET_PRICE_RANGE:'set_price_range',
-    SET_CATEGORY:'set_categoty',
+    SET_CATEGORY:'set_category',
     SEARCH:'search'
 }
 

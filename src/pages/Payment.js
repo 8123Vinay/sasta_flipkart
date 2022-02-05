@@ -14,7 +14,7 @@ export default function Payment() {
               {Object.values(items).map((item)=>{
                   return(<Card item={item}/>)
               })}
-            </div>
+       </div>
     </div>
   )
 }
