@@ -19,8 +19,8 @@ export default function Cart() {
     <h2 className="text-center mb-10">Items In your Cart</h2>
     <h1 className="">Total Price :${parseInt(totalPrice)}</h1>
     <div className="flex flex-wrap gap-10">
-              {Object.values(items).map((item)=>{
-                  return(<Card item={item}/>)
+              {Object.values(items).map((item,index)=>{
+                  return(<Card item={item} key={index}/>)
               })}
        </div>
        <Link to ="/payment" >

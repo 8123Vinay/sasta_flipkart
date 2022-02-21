@@ -1,10 +1,12 @@
-import React, { createContext ,useState} from 'react'
+import React, { createContext ,useState, useEffect} from 'react'
 import {BrowserRouter, Route,Routes } from 'react-router-dom'
 import {Home,About,Items,Payment,Quotes,News} from './pages'
+import {Offers} from './components'
 import  Navbar  from './components/Navbar'
 import './App.css';
 import Cart from './components/Cart'
 import Filter from './components/Filter'
+import {useDispatch} from 'react-redux';
 
 export const filterContext=createContext()
 
@@ -12,14 +14,17 @@ export const filterContext=createContext()
 
 
 function App() {
+  const dispatch=useDispatch();
   const [filter,setFilter]=useState(false)
   const [inputValue,setInputValue]=useState("");
+ 
   
   return (
-    <div>
-
+    <div className="w-full">
+       <Offers />
        <BrowserRouter >
           <Navbar setInputValue={setInputValue} filter={filter} setFilter={setFilter}/>
+          
           <Routes>
             <Route path ="/" element={<Home />} />
             <Route path ="/about" element={<About />} />
@@ -40,3 +45,6 @@ function App() {
 }
 
 export default App;
+
+
+

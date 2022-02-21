@@ -15,9 +15,9 @@ export default function Filter({filter}) {
           Choose Price Range
       </h1>
        <div className="flex flex-col gap-4">
-           {price_ranges.map((range)=>{
+           {price_ranges.map((range,index)=>{
                return(
-                   <h1 className="hover:cursor-pointer text-center"
+                   <h1 className="hover:cursor-pointer text-center" key={index}
                      onClick={()=>{
                       dispatch(setPriceRange(range))
                      }}>$ {range.start}-{range.end} </h1>

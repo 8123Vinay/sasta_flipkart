@@ -1,24 +1,19 @@
 import React,{useState,useContext} from 'react'
 import { NavLink } from "react-router-dom";
 import '../styles/Navbar.css'
-import {getCategories} from '../dummy'
 import {toggleCart} from '../store/cart.js'
 import {useSelector,useDispatch} from 'react-redux';
 import { setCategory,setPriceRange,searchItems } from '../store/items'
 
 
-
+const categories=[`men's clothing`, `women's clothing`,  "jewelery","electronics"]
 
 
 export default function Navbar({filter,setFilter}) {
   const [inputValue,setInputValue]=useState("")
-  const categories=getCategories();
   const {cartState,itemsState,newsState}=useSelector((state)=>state);
   const {isOpen}=cartState;
   const dispatch=useDispatch();
-  const categor=categories.map((cat)=>{
-    return (cat.name)
-  })
 
   // const cates=["men","women","electronics","jewellery"]
   
@@ -32,10 +27,10 @@ export default function Navbar({filter,setFilter}) {
       }}>Items</h3></NavLink>
  */}
 
-       {categor.map((category)=>{
+       {categories.map((category,index)=>{
          return(
-           <NavLink to={`items/${category}`}  >
-             <h3 ClassName="text-green" onClick={()=>{
+           <NavLink to={`items/${category}`}  key={index}>
+             <h3 className="text-green" onClick={()=>{
                  dispatch(setCategory(category))
              }}>{category}</h3>
            </NavLink>

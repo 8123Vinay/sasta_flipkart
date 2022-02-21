@@ -1,69 +1,98 @@
-import data from '../dummy/data.json'
-import { getItems,getSearchItems } from '../dummy'
-const allItems=data.items;
-
 const ACTIONS={
     SET_PRICE_RANGE:'set_price_range',
     SET_CATEGORY:'set_category',
-    SEARCH:'search'
+    SEARCH:'search',
+    GET_ITEMS:"get_items"
 }
 
 
+async function fetchItems(){
+    let response=await fetch("https://fakestoreapi.com/products");
+    response=await response.json();
+    return response;
+}
+
+
+export function getItems(){
+    return async (dispatch)=>{
+
+        dispatch({type:ACTIONS.GET_ITEMS, payload:fetchItems()});
+    }
+}
+
+
+
+
 export function setPriceRange(range){
-    return{
-        type:ACTIONS.SET_PRICE_RANGE,
-        payload:range
+    return async (dispatch)=>{
+        let response=await fetchItems()
+        let items=response.filter((item)=>{
+            return(Math.floor(item.price)>=range.start &&  Math.floor(item.price)<=range.end)
+        })
+        dispatch({
+            type:ACTIONS.SET_PRICE_RANGE,
+            payload:items
+        })
     }
 }
 
 export function setCategory(category){
-    return(
+   return async (dispatch)=>{
+   let response=await fetchItems()
+    let items=response.filter((item)=>{
+        return(item.category===category)
+    })
+ 
+    dispatch(
         {
             type:ACTIONS.SET_CATEGORY,
-            payload:category
+            payload:items
         }
     )
+}
+
+    
 }
 
 export function searchItems(input){
-    return(
-        {
-            type:ACTIONS.SEARCH,
-            payload:input
-        }
-    )
+    return async (dispatch)=>{
+       let response=fetchItems()
+        let items=await response.filter((item)=>{
+            return(item.title.includes(input))
+        })
+     
+        dispatch(
+            {
+                type:ACTIONS.SET_CATEGORY,
+                payload:items
+            }
+        )
+    }
 }
 
 export default function Items(state={
-    items:allItems,
-    categoryName:undefined,
-    price_range:{start:0,end:10000}
-
+    items:null,
 },action)
 
 {
     switch(action.type){
-
         case ACTIONS.SET_PRICE_RANGE:{
-          const range=action.payload;
-          let newItems=getItems(state.categoryName, range)
-          console.log(state.categoryName , range)
-          console.log(newItems)
-          return {...state, items:newItems, price_range:range} 
+          return {items:action.payload} 
 
         }
 
         case ACTIONS.SET_CATEGORY:{
-              const categoryName=action.payload;
-              let newItems=getItems(categoryName,undefined);
-              return {...state, categoryName:categoryName,items:newItems,range:{start:0,end:10000}}
+            return {items:action.payload} 
         }
 
         case ACTIONS.SEARCH:{
-           let newItems=getSearchItems(action.payload);
-           return{...state,categoryName:undefined, items:newItems,range:{start:0,end:10000}}
+            return {items:action.payload} 
         }
 
+        case ACTIONS.GET_ITEMS:{
+            return {items:action.payload}
+        }
+    
         default:
           return state
     }
